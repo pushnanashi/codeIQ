@@ -1,0 +1,33 @@
+<?php
+ 
+$max = 500; //max num
+ 
+$array = array_fill(2,$max-1,true);
+ 
+$heiho = floor(sqrt($max));
+ 
+for($i=1; $i<=$max; $i++){
+	if(isset($array[$i])){
+		$p = $i;
+		if($p < $heiho){
+			$dp = $p * 2;	
+			while($dp <= $max){
+				unset($array[$dp]);
+				$dp += $p;
+			}
+		}
+	}
+}
+$prime = array_keys($array);
+$primemax = max(array_keys($prime));
+
+for($ii=0;$ii<=$primemax;$ii++){
+ 
+	$a = bcpowmod(2 ,$prime[$ii]+5, $prime[$ii]+6);
+	
+	if($a == 1){
+		echo "(" . $prime[$ii] . "," . ($prime[$ii]+6) . ")";
+	}
+	
+}
+
